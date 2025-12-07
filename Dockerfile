@@ -1,5 +1,9 @@
 FROM nikolaik/python-nodejs:python3.10-nodejs19
 
+# Fix old Debian Buster repos
+RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
+    sed -i '/security/d' /etc/apt/sources.list
+
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ffmpeg \
     && apt-get clean \
